@@ -1,6 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator
-from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
 
 
@@ -9,7 +8,8 @@ from django.utils import timezone
 class AccountExtension(models.Model): 
     account_number = models.BigIntegerField(
         primary_key=True,
-        validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)]
+        validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)], 
+        unique = True
     )
     name = models.CharField(
         max_length = 35
@@ -26,13 +26,19 @@ class ATMCard(models.Model):
         ('active', 'Active'),
         ('deactivated', 'deactivated')
     )
+    AUTH_STATUS = (
+        ('on', 'On'), 
+        ('off', 'Off')
+    )
     card_number = models.BigIntegerField(
         primary_key=True,
         unique=True,
-        validators=[MinValueValidator(1000000000000000),MaxValueValidator(9999999999999999)])
+        validators=[MinValueValidator(1000000000000000),MaxValueValidator(9999999999999999)]
+    )
     account_number: models.ForeignKey(
         AccountExtension,
-        on_delete=models.CASCADE, 
+        to_field = 'account_number',
+        on_delete=models.DO_NOTHING, 
         verbose_name="account extension"
     )
     pin = models.IntegerField(
@@ -41,17 +47,26 @@ class ATMCard(models.Model):
     name = models.CharField(
         max_length=35
     )
-    date_issued = models.DateField(),
-    expire_date = models.DateField(), 
-    address = models.CharField(
-        max_length=70
+    date_issued = models.DateField(
+        default = timezone.now
     )
-    two_fact_auth_status = models.BooleanField(),
+    expire_date = models.DateField(
+        default = timezone.now
+    ) 
+    address = models.CharField(
+        max_length=100
+    )
+    two_fact_auth_status = models.CharField(
+        max_length = 5,
+        choices = AUTH_STATUS, 
+        default = 'deactivated'
+    )
     phone_number = models.CharField(
         max_length=10
     )
     card_status = models.CharField(
         max_length=15,
-        choices=CARD_STATUS_CHOICES
+        choices=CARD_STATUS_CHOICES, 
+        default = 'off'
     )
 
