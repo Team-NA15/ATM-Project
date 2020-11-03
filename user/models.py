@@ -35,11 +35,12 @@ class ATMCard(models.Model):
         max_length = 16,
         unique=True,
     )
-    account_number: models.ForeignKey(
+    account_number = models.ForeignKey(
         AccountExtension,
         to_field = 'account_number',
         on_delete=models.DO_NOTHING, 
-        verbose_name="account extension"
+        verbose_name="account extension", 
+        default = None
     )
     pin = models.CharField(
         max_length = 4

@@ -3,7 +3,7 @@ from user.models import AccountExtension
 
 #GET request loads page with options for ATM cardholder 
 def home(request): 
-
+    
     return render(request, 'user/home.html')
 
 
@@ -20,3 +20,7 @@ def home(request):
     # for account in accounts: 
     #     print("account num: ",account.account_number)
     #     print("name: ", account.name)
+
+
+    #SAVING FOREIGN KEYS
+    #card.account_number = AccountExtension.objects.get(account_number = '1111111111')
