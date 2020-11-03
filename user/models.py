@@ -6,9 +6,9 @@ from django.utils import timezone
 # Create your models here.
 
 class AccountExtension(models.Model): 
-    account_number = models.BigIntegerField(
+    account_number = models.CharField(
         primary_key=True,
-        validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)], 
+        max_length = 10,
         unique = True
     )
     name = models.CharField(
@@ -30,10 +30,10 @@ class ATMCard(models.Model):
         ('on', 'On'), 
         ('off', 'Off')
     )
-    card_number = models.BigIntegerField(
+    card_number = models.CharField(
         primary_key=True,
+        max_length = 16,
         unique=True,
-        validators=[MinValueValidator(1000000000000000),MaxValueValidator(9999999999999999)]
     )
     account_number: models.ForeignKey(
         AccountExtension,
@@ -41,8 +41,8 @@ class ATMCard(models.Model):
         on_delete=models.DO_NOTHING, 
         verbose_name="account extension"
     )
-    pin = models.IntegerField(
-        validators=[MinValueValidator(1000),MaxValueValidator(9999)]
+    pin = models.CharField(
+        max_length = 4
     )
     name = models.CharField(
         max_length=35
@@ -59,7 +59,7 @@ class ATMCard(models.Model):
     two_fact_auth_status = models.CharField(
         max_length = 5,
         choices = AUTH_STATUS, 
-        default = 'deactivated'
+        default = 'off'
     )
     phone_number = models.CharField(
         max_length=10
@@ -67,6 +67,6 @@ class ATMCard(models.Model):
     card_status = models.CharField(
         max_length=15,
         choices=CARD_STATUS_CHOICES, 
-        default = 'off'
+        default = 'active'
     )
 

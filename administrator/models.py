@@ -7,9 +7,9 @@ class ATMachine(models.Model):
         ("active", "Active"),
         ("deactivated", "Deactivated")
     )
-    atm_machine_uid = models.BigIntegerField(
+    atm_machine_uid = models.CharField(
         primary_key = True, 
-        validators = [MinValueValidator(1000000000), MaxValueValidator(9999999999)], 
+        max_length = 16,
         unique = True
     )
     current_balance = models.BigIntegerField()
@@ -32,9 +32,9 @@ class ATMachine(models.Model):
 
 
 class ATMachineRefill(models.Model): 
-    refill_id = models.BigIntegerField(
+    refill_id = models.CharField(
         primary_key = True,
-        validators = [MinValueValidator(1000000000), MaxValueValidator(9999999999)], 
+        max_length = 10,
         unique = True
     )
     atm_machine_uid = models.ForeignKey(
