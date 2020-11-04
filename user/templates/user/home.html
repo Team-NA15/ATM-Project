@@ -1,4 +1,12 @@
 {% extends "user/base.html" %}
 {% block content %}
     <h1> User Home Page </h1>
+    <div class = 'row'> 
+        <div class = 'col'> 
+            <a href = "{% url 'cash-transfer' %}" class = 'btn btn-primary mt-5'> Cash Transfer </a>
+            <a href = "{% url 'cash-withdrawal' %}" class = 'btn btn-primary mt-5'> Cash Withdrawal </a> 
+            <a href = "{% url 'balance-inquiry' %}" class = 'btn btn-primary mt-5'> Balance Inquiry </a> 
+
+        </div> 
+    </div> 
 {% endblock content %}

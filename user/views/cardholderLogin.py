@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from user.models import ATMCard, AccountExtension
 from django.core import serializers
 from random import randint
+from ..decorator import user_authenticated
 
 
+@user_authenticated
 def cardholderLogin(request): 
     if request.method == 'POST': 
         form = UserForm(request.POST)
