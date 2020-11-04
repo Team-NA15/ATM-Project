@@ -16,9 +16,7 @@ def cardholderLogin(request):
                 return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Not a valid card number'})
             
             if card.pin == form.cleaned_data['pin']: 
-                #Here we reference account_number twice, first gives us the foreign key object
-                #second account_number gives us the number itself
-                request.session['token'] = card.account_number.account_number
+                request.session['token'] = card.card_number
                 return redirect('/user')
             else: 
                 return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Pin does not match'})
