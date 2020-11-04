@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 def user_authenticated(function): 
     def wrap(request, *args, **kwargs): 
         if 'token' not in request.session: 
+            if request.path == '/user/cardholder-login': 
+                return function(request, *args, **kwargs)
             return redirect('/user/cardholder-login')
         else: 
             if request.path == '/user/cardholder-login': 

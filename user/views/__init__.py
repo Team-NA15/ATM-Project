@@ -6,3 +6,4 @@ from .home import *
 from .phoneNumberChange import *
 from .pinChange import *
 from .transactionHistory import *
+from .cardholderLogout import *
