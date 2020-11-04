@@ -12,7 +12,13 @@ class Transaction(models.Model):
         ('canceled', 'Canceled'), 
         ('pending', 'Pending'), 
         ('complete', 'Complete')
-    ) 
+    )
+    TRANSACTION_TYPES = (
+        ('cash-withdrawal', 'Cash Withdrawal'), 
+        ('cash-transfer', 'Cash Transfer'), 
+        ('balance-inquiry', 'Balance Inquiry')
+    )
+
     transaction_id = models.AutoField(
         primary_key = True, 
         default = 1000000000
@@ -41,5 +47,7 @@ class Transaction(models.Model):
         validators = [MinValueValidator(1000000000), MaxValueValidator(9999999999)]
     )
     transaction_type = models.CharField(
-        max_length = 30
+        max_length = 30, 
+        choices = TRANSACTION_TYPES, 
+        default = 'unknown'
     )
