@@ -4,6 +4,6 @@ from django.shortcuts import redirect
 def cardholderLogout(request): 
     try: 
         del request.session['token']
-        return redirect('/user/cardholder-login')
+        return redirect('/')
     except KeyError: 
         pass 
