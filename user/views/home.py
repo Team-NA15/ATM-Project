@@ -1,11 +1,11 @@
 from django.shortcuts import render 
 from user.models import AccountExtension
 from ..decorator import user_authenticated
-
+from main.models import Transaction
 #GET request loads page with options for ATM cardholder 
 @user_authenticated
 def home(request): 
-    
+    print(Transaction.objects.all())
     return render(request, 'user/home.html')
 
 

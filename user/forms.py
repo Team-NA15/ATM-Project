@@ -9,3 +9,13 @@ class UserForm(forms.Form):
         label = 'PIN', 
         max_length = 4
     )
+
+
+class TransferForm(forms.Form):
+    account_num = forms.CharField(
+        label = 'Account Number',
+        max_length = 10
+    )
+    amount = forms.IntegerField(
+        label = 'Amount'
+    )

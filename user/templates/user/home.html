@@ -6,7 +6,13 @@
             <a href = "{% url 'cash-transfer' %}" class = 'btn btn-primary mt-5'> Cash Transfer </a>
             <a href = "{% url 'cash-withdrawal' %}" class = 'btn btn-primary mt-5'> Cash Withdrawal </a> 
             <a href = "{% url 'balance-inquiry' %}" class = 'btn btn-primary mt-5'> Balance Inquiry </a> 
-
         </div> 
+    </div>
+    <div class="row">
+        <div class="col">
+            {% if message %}
+                <p class = 'mt-5'> {{message}} </p>
+            {% endif %}
+        </div>
     </div> 
 {% endblock content %}

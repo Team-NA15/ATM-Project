@@ -21,7 +21,7 @@ class Transaction(models.Model):
 
     transaction_id = models.AutoField(
         primary_key = True, 
-        default = 1000000000
+        unique = True
     )
     atm_card_number = models.ForeignKey(
         ATMCard, 
@@ -43,8 +43,8 @@ class Transaction(models.Model):
         choices = STATUS_CHOICES, 
         default = 'pending'
     )
-    response_code = models.BigIntegerField(
-        validators = [MinValueValidator(1000000000), MaxValueValidator(9999999999)]
+    response_code = models.CharField(
+        max_length = 3
     )
     transaction_type = models.CharField(
         max_length = 30, 
