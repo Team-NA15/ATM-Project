@@ -33,8 +33,9 @@ def cashWithdrawal(request):
             else: 
                 # there are enough funds   
                 #Update Database
-                print('Money dispursed. New Balance: ', card.account_number.balance -= amount)
+                card.account_number.balance -= amount
                 card.account_number.save()
+                print("Money dispursed. New Balance: ", amount)
                 transaction = Transaction(
                     status = 'complete',
                     response_code = '200',
