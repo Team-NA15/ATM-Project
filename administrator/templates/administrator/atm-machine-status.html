@@ -1,0 +1,25 @@
+{% extends "administrator/base.html" %}
+{% block content %}
+    <h1> ATM Machine Status </h1>
+    <table>
+    <tr>
+        <th>Status</th>
+        <th>Machine ID</th>
+        <th>Current Balance</th>
+        <th>Min. Balance</th>
+        <th>Location</th>
+        <th>Last Refill</th>
+        <th>Next Maintenance</th>
+    </tr>
+    <tr>
+        <th>{{status}}</th>
+        <th>{{machID}}</th>
+        <th>{{balance}}</th>
+        <th>{{minBal}}</th>
+        <th>{{address}}</th>
+        <th>{{refill}}</th>
+        <th>{{maintenance}}</th>
+    </tr>
+    </table>
+        
+{% endblock content %}

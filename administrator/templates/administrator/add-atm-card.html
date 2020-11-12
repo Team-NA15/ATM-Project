@@ -1,0 +1,12 @@
+{% extends "administrator/base.html" %}
+{% block content %}
+    <h1> Add a new ATM Card </h1>
+    <form action = '/administrator/add-atm-card' method = 'POST'> 
+        {% csrf_token %}
+        {{form}}
+        <br><button class = 'btn btn-primary' type = 'submit'>Add Card</button> 
+    </form>
+    {% if message %}
+    <p class = 'mt-5'> {{message}} </p>
+    {% endif %} 
+{% endblock content %}
