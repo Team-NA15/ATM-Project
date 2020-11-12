@@ -2,8 +2,6 @@ from django.shortcuts import render, redirect
 from ..forms import UserForm
 from django.http import HttpResponse
 from user.models import ATMCard, AccountExtension
-from django.core import serializers
-from random import randint
 from ..decorator import user_authenticated
 
 
