@@ -1,6 +1,6 @@
 from django import forms
 
-class BlockCardForm(forms.Form): 
+class ModCardStatusForm(forms.Form): 
     card_number = forms.CharField(
         label = 'Card Number', 
         max_length = 16
