@@ -1,6 +1,6 @@
 {% extends "administrator/base.html" %}
 {% block content %}
-    <h1> Block Card </h1>
+    <h1> Activate Card </h1>
     <form action = '/administrator/activate-atm-card' method = 'POST' class = 'mt-5'> 
         {% csrf_token %}
         {{form}}
