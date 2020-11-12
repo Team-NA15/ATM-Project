@@ -11,7 +11,7 @@ class UserForm(forms.Form):
     )
 
 class WithdrawalForm(forms.Form):
-    amount = forms.CharField(
+    amount = forms.IntField(
         label = "amount",
         max_length = 9
     )
