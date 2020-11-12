@@ -17,11 +17,15 @@ def cardholderLogin(request):
             except: 
                 return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Not a valid card number'})
             
-            if card.pin == form.cleaned_data['pin']: 
+            if card.pin != form.cleaned_data['pin']:
+                form = UserForm() 
+                return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Pin does not match'})
+            if card.card_status != 'active':
+                form = UserForm() 
+                return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Card is not active, see administrator.'})
+            else: 
                 request.session['token'] = card.card_number
                 return redirect('/user')
-            else: 
-                return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Pin does not match'})
         else: 
             return render(request, 'user/cardholder-login.html', {'form': form, 'message': 'Form not valid'})
     else:
