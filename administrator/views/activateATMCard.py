@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from ..forms import ModCardForm
 from user.models import ATMCard
-from main.services import renderPage, convertPathToHtml
+from main.services import renderPage
 
 #Request to activate an ATM card
 def activateATMCard(request): 
