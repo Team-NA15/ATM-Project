@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from ..forms import ModCardForm
 from user.models import ATMCard
-from main.services import renderPage
+from main.services import renderPage, getCardholderByNumber, setContextMessage
 
 #Request to activate an ATM card
 def activateATMCard(request): 
@@ -16,19 +16,19 @@ def activateATMCard(request):
     if request.method == 'POST': 
         form = ModCardForm(request.POST)
         if form.is_valid():
-            try: 
-                card = ATMCard.objects.get(card_number = form.cleaned_data['card_number'])
-            except: 
-                renderData['context']['message'] = 'Card Number Invalid'
+            #verify card holder exists, if card is string we have an error message 
+            card = getCardholderByNumber(form.cleaned_data['card_number'])
+            if isinstance(card,str): 
+                setContextMessage(renderData['context'], card)
                 return renderPage(renderData)
 
             if card.card_status == 'active': 
-                renderData['context']['message'] = 'Card is already active'
+                setContextMessage(renderData['context'],'Card is already active')
                 return renderPage(renderData)
             else: 
                 card.card_status = 'active'
                 card.save()
-                renderData['context']['message'] = 'Card activated'
+                setContextMessage(renderData['context'],'Card activated')
                 return renderPage(renderData)
                 
         else: 

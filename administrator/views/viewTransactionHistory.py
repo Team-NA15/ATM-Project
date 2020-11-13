@@ -22,7 +22,6 @@ def viewTransactionHistory(request):
             card = getCardholderByNumber(form.cleaned_data['card_number'])
             #if card is a string it's an error message 
             if isinstance(card, str):
-                print(card)
                 setContextMessage(renderData['context'], card)
                 return renderPage(renderData)
             
