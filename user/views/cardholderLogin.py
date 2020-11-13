@@ -30,4 +30,4 @@ def cardholderLogin(request):
         form = UserForm()
         return render(request, 'user/cardholder-login.html', {'form': form})
 
-#sample card number for testing: 1605104397380560
+#sample card number for testing: 1605104397380560, PIN: 9082
