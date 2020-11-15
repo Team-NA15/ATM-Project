@@ -1,6 +1,5 @@
 from django import forms
 
-<<<<<<< HEAD
 class AdminForm(forms.Form): 
     card_number = forms.CharField(
         label = 'card number',
@@ -9,7 +8,32 @@ class AdminForm(forms.Form):
     pin = forms.CharField(
         label = 'PIN', 
         max_length = 4
-=======
+        )
+class newCardForm(forms.Form): 
+    card_number = forms.CharField(
+        max_length = 16,
+        label = "card_number"
+    )
+    account_number = forms.CharField(
+        max_length = 10,
+        label = "account_number"
+    )
+    pin = forms.CharField(
+        max_length = 4,
+        label = "pin"
+    )
+    name = forms.CharField(
+        max_length=35,
+        label = "name"
+    )
+    address = forms.CharField(
+        max_length=100,
+        label = "address"
+    )
+    phone_number = forms.CharField(
+        max_length=12,
+        label = "phone_number"
+    )
 class ModCardForm(forms.Form): 
     card_number = forms.CharField(
         label = 'Card Number', 
@@ -24,5 +48,4 @@ class PhoneResetForm(forms.Form):
     phone_number = forms.CharField(
         label = 'New Phone Number', 
         max_length = 12
->>>>>>> a233bbb1fa45df17a80b73acb433faac1c12e268
     )
