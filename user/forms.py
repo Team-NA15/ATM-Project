@@ -10,6 +10,10 @@ class UserForm(forms.Form):
         max_length = 4
     )
 
+class WithdrawalForm(forms.Form):
+    amount = forms.IntegerField(
+        label = "amount"
+    )
 
 class TransferForm(forms.Form):
     account_num = forms.CharField(

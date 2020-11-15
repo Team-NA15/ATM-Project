@@ -15,7 +15,7 @@ class AccountExtension(models.Model):
         max_length = 35
     )
     phone_number = models.CharField(
-        max_length = 10
+        max_length = 12
     )
     balance = models.BigIntegerField()
 
@@ -63,7 +63,7 @@ class ATMCard(models.Model):
         default = 'off'
     )
     phone_number = models.CharField(
-        max_length=10
+        max_length=12
     )
     card_status = models.CharField(
         max_length=15,
