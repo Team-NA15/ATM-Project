@@ -14,7 +14,6 @@ def balanceInquiry(request):
     #since this is a foreign key, card.account_number is the Account Extension Object
     #associated with this ATMCard 
     account = card.account_number
-
+    user_balance = account.balance
     #here we can access the actual account_number and balance
-    print('account num: ',account.account_number)
-    return HttpResponse(account.balance)
+    return render(request, 'user/balance-inquiry.html', {'user_balance': user_balance, 'account':account})
