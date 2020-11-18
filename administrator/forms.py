@@ -1,5 +1,17 @@
 from django import forms
 
+class AdminLoginForm(forms.Form): 
+    username = forms.CharField(
+        label = 'username', 
+        max_length = 20
+    )
+    password = forms.CharField(
+        label = 'Password', 
+        max_length = 20
+    )
+
+
+
 class AdminForm(forms.Form): 
     card_number = forms.CharField(
         label = 'card number',

@@ -3,8 +3,10 @@ from ..forms import ModCardForm
 from user.models import ATMCard
 from random import randint
 from main.services import renderPage, getCardholderByNumber, setContextMessage
+from ..decorator import admin_authenticated
 
 #Request to reset PIN so the user can use their card
+@admin_authenticated
 def resetPin(request):
     renderData = {
         'request': request,

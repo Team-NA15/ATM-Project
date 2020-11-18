@@ -1,3 +1,7 @@
+from .adminLogin import *
+
+from .adminLogout import *
+
 from .addNewATMCard import *
 
 from .atmMachineStatus import *

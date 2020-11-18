@@ -2,9 +2,12 @@ from django.shortcuts import render
 from ..forms import PhoneResetForm
 from user.models import ATMCard
 from main.services import renderPage, getCardholderByNumber, setContextMessage
+from ..decorator import admin_authenticated
 import re
 
+
 #Request to reset phone number
+@admin_authenticated
 def resetPhoneNumber(request): 
     renderData = {
         'request': request,

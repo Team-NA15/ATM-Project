@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from user.models import ATMCard
 from main.models import Transaction
+from administrator.models import Admin
 
 #METHOD TO RENDER PAGES WITH ANY CONTEXT
 #ASSUMES THAT PATH HAS BEEN SET PROPERLY
@@ -22,7 +23,7 @@ def getCardholderByNumber(cardNumber):
     try: 
         card = ATMCard.objects.get(card_number = cardNumber)
     except: 
-        return 'Card Number Invalid'
+        return false
     return card
 
 #METHOD TO RETRIEVE TRANSACTIONS VIA ATM CARDHOLDERS CARD NUMBER
@@ -43,3 +44,12 @@ def getTransactionsByCard(cardNumber):
 def setContextMessage(data, message): 
     data['message'] = message
     return
+
+
+def getAdmin(user): 
+    try:
+        admin = Admin.objects.get(username = user)
+    except: 
+        return false
+    return admin
+

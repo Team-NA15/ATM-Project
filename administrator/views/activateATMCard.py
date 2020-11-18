@@ -18,7 +18,7 @@ def activateATMCard(request):
         if form.is_valid():
             #verify card holder exists, if card is string we have an error message 
             card = getCardholderByNumber(form.cleaned_data['card_number'])
-            if isinstance(card,str): 
+            if not card: 
                 setContextMessage(renderData['context'], card)
                 return renderPage(renderData)
 

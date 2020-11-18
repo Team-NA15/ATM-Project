@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='admin-home'),
+    path('admin-login', views.adminLogin, name = 'admin-login'),
+    path('admin-logout', views.adminLogout, name = 'admin-logout'),
     path('add-atm-card', views.addNewATMCard, name = 'add-atm-card'), 
     path('atm-machine-status', views.viewATMachineStatus, name = 'atm-machine-status'), 
     path('update-atm-card', views.updateATMCard, name = 'update-atm-card'), 

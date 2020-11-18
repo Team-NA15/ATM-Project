@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 from administrator.models import ATMachine
 from ..forms import AdminForm
 from user.models import ATMCard
+from ..decorator import admin_authenticated
+
+@admin_authenticated
 def viewATMachineStatus(request): 
     #logic for viewing ATM machine status goes here 
     status = 'active'

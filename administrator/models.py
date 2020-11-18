@@ -1,7 +1,18 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-# Create your models here.
+
+class Admin(models.Model): 
+    username = models.CharField(
+        primary_key = True, 
+        max_length = 20, 
+        unique = True
+    )
+    password = models.CharField(
+        max_length = 20
+    )
+
+
 class ATMachine(models.Model): 
     STATUS_CHOICES = (
         ("active", "Active"),

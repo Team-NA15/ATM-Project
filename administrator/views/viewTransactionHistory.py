@@ -2,10 +2,10 @@ from main.models import Transaction
 from ..forms import ModCardForm
 from main.services import renderPage, getCardholderByNumber, setContextMessage, getTransactionsByCard
 from user.models import ATMCard
-
-
+from ..decorator import admin_authenticated
 
 #Request to view transaction history of the ATM, there may be many transactions so a new page for this would work better 
+@admin_authenticated
 def viewTransactionHistory(request): 
     renderData = {
         'request': request, 
@@ -21,8 +21,8 @@ def viewTransactionHistory(request):
         if form.is_valid():
             card = getCardholderByNumber(form.cleaned_data['card_number'])
             #if card is a string it's an error message 
-            if isinstance(card, str):
-                setContextMessage(renderData['context'], card)
+            if not card:
+                setContextMessage(renderData['context'], 'Card not valid')
                 return renderPage(renderData)
             
             transactions = getTransactionsByCard(form.cleaned_data['card_number'])
