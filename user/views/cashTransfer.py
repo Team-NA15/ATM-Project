@@ -15,6 +15,9 @@ def cashTransfer(request):
             ## Account from form
             accNum = form.cleaned_data['account_num']
             amount = form.cleaned_data['amount']
+            if (amount < 0): 
+                form = TransferForm()
+                return render(request, 'user/cash-transfer.html', {'form': form, 'message': 'Not a valid transfer amount'})
             try:
                 ## tries to get the account
                 rec_account = AccountExtension.objects.get(account_number = accNum)
@@ -63,6 +66,7 @@ def cashTransfer(request):
             'message': 'Form is not valid.'
         })
     else:
+        print(AccountExtension.objects.all())
         form = TransferForm()
         return render(request, 'user/cash-transfer.html', {
             'form': form
