@@ -30,6 +30,9 @@ class ATMCard(models.Model):
         ('on', 'On'), 
         ('off', 'Off')
     )
+    def newExpDate(): 
+        return timezone.now() + timezone.timedelta(days=1095)
+
     card_number = models.CharField(
         primary_key=True,
         max_length = 16,
@@ -52,7 +55,7 @@ class ATMCard(models.Model):
         default = timezone.now
     )
     expire_date = models.DateField(
-        default = timezone.now
+        default = newExpDate
     ) 
     address = models.CharField(
         max_length=100

@@ -21,6 +21,8 @@ class AdminForm(forms.Form):
         label = 'PIN', 
         max_length = 4
         )
+
+        
 class newCardForm(forms.Form): 
     card_number = forms.CharField(
         max_length = 16,
@@ -60,4 +62,10 @@ class PhoneResetForm(forms.Form):
     phone_number = forms.CharField(
         label = 'New Phone Number', 
         max_length = 12
+    )
+
+class UpdateExpDateForm(forms.Form): 
+    card_number = forms.CharField(
+        label = 'Card Number',
+        max_length = 16
     )

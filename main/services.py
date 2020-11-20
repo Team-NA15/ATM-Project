@@ -2,6 +2,10 @@ from django.shortcuts import render
 from user.models import ATMCard
 from main.models import Transaction
 from administrator.models import Admin
+from django.utils import timezone
+# from datetime import datetime, date
+import datetime
+
 
 #METHOD TO RENDER PAGES WITH ANY CONTEXT
 #ASSUMES THAT PATH HAS BEEN SET PROPERLY
@@ -52,4 +56,13 @@ def getAdmin(user):
     except: 
         return false
     return admin
+
+
+def newExpDate(): 
+    # year = int(str(timezone.now())[0:4])
+    # month = int(str(timezone.now())[5:7])
+    # day = int(str(timezone.now())[8:10])
+    # return datetime.date(year, month, day)
+    # return datetime.now().replace(year=int(temp))
+    return timezone.now() + timezone.timedelta(days=1095)
 
