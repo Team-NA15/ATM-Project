@@ -1,6 +1,6 @@
 from main.models import Transaction
 from ..forms import ModCardForm
-from main.services import renderPage, getCardholderByNumber, setContextMessage, getTransactionsByCard
+from main.services import renderPage, getCardholderByNumber, setContextMessage, getTransactionsByCard, getTransactionsByMachine, getCardholderByNumber
 from user.models import ATMCard
 from ..decorator import admin_authenticated
 
@@ -13,28 +13,22 @@ def viewTransactionHistory(request):
         'context': {
             'form': ModCardForm(), 
             'message': '', 
-            'history': []
+            'history': getTransactionsByMachine(request.session['machine'])
         }
     }
     if request.method == 'POST': 
         form = ModCardForm(request.POST)
-        if form.is_valid():
+        if form.is_valid(): 
             card = getCardholderByNumber(form.cleaned_data['card_number'])
-            #if card is a string it's an error message 
-            if not card:
-                setContextMessage(renderData['context'], 'Card not valid')
+            if not card: 
+                setContextMessage(renderData['context'], 'Card not found')
                 return renderPage(renderData)
-            
             transactions = getTransactionsByCard(form.cleaned_data['card_number'])
-            #if transactions is a string it's an error message
-            if isinstance(transactions, str): 
-                setContextMessage(renderData['context'], transactions)
+            if not transactions: 
+                setContextMessage(renderData['context'], 'There are not transactions for this card')
                 return renderPage(renderData)
             
             renderData['context']['history'] = transactions
-            return renderPage(renderData)
-        else: 
-            renderData['context']['message'] = 'Form is invalid'
             return renderPage(renderData)
     else: 
         return renderPage(renderData)

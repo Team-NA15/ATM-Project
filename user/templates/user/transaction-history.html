@@ -3,6 +3,9 @@
     <h1> Transaction History </h1>
     <a href = "{% url 'user-home' %}" class = 'btn btn-primary mt-5'> Back </a> 
     {% if history %}
+    {% if message %}
+    <p class = 'mt-5'> {{message}} </p>
+    {% endif %} 
     <table class="table my-5">
         <thead>
           <tr>
@@ -25,9 +28,5 @@
         {% endfor %}
         </table>
     {% endif %}
-
-    {% if message %}
-        <p class = 'mt-5'> {{message}} </p>
-    {% endif %} 
 
 {% endblock content %}

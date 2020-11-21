@@ -7,11 +7,15 @@
         {{form.as_p}}
         <button class = 'btn btn-primary' type = 'submit'> Search </button> 
     </form>
+    {% if message %}
+        <p class = 'mt-5'> {{message}} </p>
+    {% endif %} 
     {% if history %}
     <table class="table my-5">
         <thead>
           <tr>
             <th scope="col">Transaction Type</th>
+            <th scope="col"> Card Number </th>
             <th scope="col"> Date </th>
             <th scope="col"> Location </th>
             <th scope="col"> Status </th>
@@ -22,6 +26,7 @@
             <tbody>
                 <tr>
                     <td> {{transaction.transaction_type}}</td>
+                    <td> {{transaction.atm_card_number.card_number}}
                     <td> {{transaction.date}} </td>
                     <td> {{transaction.atm_machine_uid.location}} </td>
                     <td> {{transaction.status}} </td>
@@ -30,9 +35,5 @@
         {% endfor %}
         </table>
     {% endif %}
-
-    {% if message %}
-        <p class = 'mt-5'> {{message}} </p>
-    {% endif %} 
 
 {% endblock content %}

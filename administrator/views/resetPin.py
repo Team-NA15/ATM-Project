@@ -20,8 +20,8 @@ def resetPin(request):
         form = ModCardForm(request.POST)
         if form.is_valid():
             card = getCardholderByNumber(form.cleaned_data['card_number'])
-            if isinstance(card, str): 
-                setContextMessage(renderData['context'], card)
+            if not card: 
+                setContextMessage(renderData['context'], 'Card not found')
                 return renderPage(renderData)
 
             card.pin = str(randint(1000, 9999))

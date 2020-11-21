@@ -2,8 +2,10 @@ from django.shortcuts import render
 from ..forms import ModCardForm
 from user.models import ATMCard
 from main.services import renderPage, getCardholderByNumber, setContextMessage
+from ..decorator import admin_authenticated
 
 #Request to activate an ATM card
+@admin_authenticated
 def activateATMCard(request): 
     renderData = {
         'request': request,
@@ -19,7 +21,7 @@ def activateATMCard(request):
             #verify card holder exists, if card is string we have an error message 
             card = getCardholderByNumber(form.cleaned_data['card_number'])
             if not card: 
-                setContextMessage(renderData['context'], card)
+                setContextMessage(renderData['context'], 'Card not found')
                 return renderPage(renderData)
 
             if card.card_status == 'active': 

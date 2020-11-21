@@ -2,17 +2,12 @@ from django.shortcuts import render, redirect
 from administrator.models import ATMachine
 from ..forms import AdminForm, newCardForm
 from user.models import ATMCard, AccountExtension
+from ..decorator import admin_authenticated
+
 #Request to load page with form to add new ATM Card
+@admin_authenticated
 def addNewATMCard(request): 
-    #logic to load page for adding new ATM Card
-    #form = AdminForm()
-    #return render(request, 'administrator/add-atm-card.html', {'form': form})
-    #if request.method == 'GET': 
-     #   form = AdminForm(request.GET)
-      #  if form.is_valid():
-       #      form = AdminForm()
-        
-        #return render(request, 'administrator/add-atm-card.html', {'form': form})
+
     if request.method == 'POST': 
         form = newCardForm(request.POST)
         if form.is_valid():

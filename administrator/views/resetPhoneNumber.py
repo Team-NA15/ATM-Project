@@ -23,7 +23,7 @@ def resetPhoneNumber(request):
             card = getCardholderByNumber(form.cleaned_data['card_number'])
             #if card is a string it means we have an error message
             if not card: 
-                setContextMessage(renderData['context'], 'Card holder could not be found')
+                setContextMessage(renderData['context'], 'Card not found')
                 return renderPage(renderData)
 
             #verify the phone number contains only numbers

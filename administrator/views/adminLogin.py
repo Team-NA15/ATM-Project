@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect
 from ..forms import AdminLoginForm
 from django.http import HttpResponse
 from administrator.models import Admin
-from ..decorator import admin_authenticated
 from main.services import getAdmin, setContextMessage, renderPage 
 
 
-@admin_authenticated
 def adminLogin(request):
     renderData = {
         'request': request,

@@ -7,7 +7,8 @@ class AdminLoginForm(forms.Form):
     )
     password = forms.CharField(
         label = 'Password', 
-        max_length = 20
+        max_length = 20, 
+        widget = forms.PasswordInput()
     )
 
 
@@ -19,7 +20,8 @@ class AdminForm(forms.Form):
     )
     pin = forms.CharField(
         label = 'PIN', 
-        max_length = 4
+        max_length = 4, 
+        widget = forms.PasswordInput()
         )
 
         
@@ -34,7 +36,8 @@ class newCardForm(forms.Form):
     )
     pin = forms.CharField(
         max_length = 4,
-        label = "pin"
+        label = "pin", 
+        widget = forms.PasswordInput()
     )
     name = forms.CharField(
         max_length=35,

@@ -7,7 +7,8 @@ class UserForm(forms.Form):
     )
     pin = forms.CharField(
         label = 'PIN', 
-        max_length = 4
+        max_length = 4, 
+        widget = forms.PasswordInput()
     )
 
 class WithdrawalForm(forms.Form):
@@ -27,15 +28,18 @@ class TransferForm(forms.Form):
 class PinChangeForm(forms.Form): 
     old_pin = forms.CharField(
         label = 'Old PIN', 
-        max_length = 4
+        max_length = 4,
+        widget = forms.PasswordInput()
     )
     new_pin = forms.CharField(
         label = 'New PIN', 
-        max_length = 4
+        max_length = 4,
+        widget = forms.PasswordInput()
     )
     confirm_pin = forms.CharField(
         label = 'New PIN', 
-        max_length = 4
+        max_length = 4,
+        widget = forms.PasswordInput()
     )
 
 class PhoneNumberChangeForm(forms.Form): 

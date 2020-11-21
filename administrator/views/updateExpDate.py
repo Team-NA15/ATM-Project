@@ -22,7 +22,7 @@ def updateExpDate(request):
             card = getCardholderByNumber(form.cleaned_data['card_number'])
 
             if not card: 
-                setContextMessage(renderData['context'], 'Card not valid')
+                setContextMessage(renderData['context'], 'Card not found')
                 return renderPage(renderData)
             
             if card.expire_date > date.today(): 

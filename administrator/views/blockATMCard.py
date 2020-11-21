@@ -20,7 +20,7 @@ def blockATMCard(request):
         if form.is_valid(): 
             card = getCardholderByNumber(form.cleaned_data['card_number'])
             if not card: 
-                setContextMessage(renderData['context'], 'Card not valid')
+                setContextMessage(renderData['context'], 'Card not found')
                 return renderPage(renderData)
 
             if card.card_status == 'active': 

@@ -27,7 +27,7 @@ def getCardholderByNumber(cardNumber):
     try: 
         card = ATMCard.objects.get(card_number = cardNumber)
     except: 
-        return false
+        return False
     return card
 
 #METHOD TO RETRIEVE TRANSACTIONS VIA ATM CARDHOLDERS CARD NUMBER
@@ -37,11 +37,20 @@ def getTransactionsByCard(cardNumber):
     try: 
         transactions = Transaction.objects.all().filter(atm_card_number = cardNumber)
     except: 
-        return 'Card Number Invalid'
+        return False 
     if len(transactions) == 0: 
         return False
     return transactions
 
+
+def getTransactionsByMachine(machine_id): 
+    try: 
+        transactions = Transaction.objects.all().filter(atm_machine_uid = machine_id)
+    except: 
+        return False 
+    if len(transactions) == 0: 
+        return False
+    return transactions
 
 #METHOD TO SET THE MESSAGE OF CONTEXT OBJECT, ASSUMES THE OBJECT ALREADY HAS A MESSAGE PROPERTY
 #@Params: (data) the context object containing the message, (message) string message to be added to message property
