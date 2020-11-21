@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from ..forms import PhoneResetForm
 from user.models import ATMCard
 from main.services import renderPage, getCardholderByNumber, setContextMessage
 from ..decorator import admin_authenticated
-import re
+
 
 
 #Request to reset phone number
@@ -22,13 +22,13 @@ def resetPhoneNumber(request):
         if form.is_valid():
             card = getCardholderByNumber(form.cleaned_data['card_number'])
             #if card is a string it means we have an error message
-            if isinstance(card, str): 
-                setContextMessage(renderData['context'], card)
+            if not card: 
+                setContextMessage(renderData['context'], 'Card holder could not be found')
                 return renderPage(renderData)
 
             #verify the phone number contains only numbers
             check = form.cleaned_data['phone_number'].replace('-', '')
-            if (check.isdigit()):
+            if check.isdigit():
                 card.phone_number = form.cleaned_data['phone_number']
                 card.save()
                 setContextMessage(renderData['context'], 'Phone Number changed to ' + card.phone_number)

@@ -39,7 +39,7 @@ def getTransactionsByCard(cardNumber):
     except: 
         return 'Card Number Invalid'
     if len(transactions) == 0: 
-        return 'No Transactions'
+        return False
     return transactions
 
 
@@ -59,10 +59,16 @@ def getAdmin(user):
 
 
 def newExpDate(): 
-    # year = int(str(timezone.now())[0:4])
-    # month = int(str(timezone.now())[5:7])
-    # day = int(str(timezone.now())[8:10])
-    # return datetime.date(year, month, day)
-    # return datetime.now().replace(year=int(temp))
     return timezone.now() + timezone.timedelta(days=1095)
+
+
+def validatePhoneNumber(phone_number): 
+    countCheck = phone_number.count('-')
+    if countCheck != 2: 
+        return False 
+    numberCheck = phone_number.replace('-', '')
+    if not numberCheck.isdigit(): 
+        return False 
+    
+    return True
 

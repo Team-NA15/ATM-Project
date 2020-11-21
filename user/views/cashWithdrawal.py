@@ -22,6 +22,12 @@ def cashWithdrawal(request):
                     'message': 'User does not exist with that account number.'
                 })
             amount = form.cleaned_data['amount']
+            if amount <= 0: 
+                form = WithdrawalForm()
+                return render(request, 'user/cash-withdrawal.html', {
+                    'form': form, 
+                    'message': 'Not a valid withdrawal amount'
+                })
             ## checks our balance 
             if card.account_number.balance < amount:
                 ## if there are not enough funds 

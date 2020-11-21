@@ -23,3 +23,27 @@ class TransferForm(forms.Form):
     amount = forms.IntegerField(
         label = 'Amount'
     )
+
+class PinChangeForm(forms.Form): 
+    old_pin = forms.CharField(
+        label = 'Old PIN', 
+        max_length = 4
+    )
+    new_pin = forms.CharField(
+        label = 'New PIN', 
+        max_length = 4
+    )
+    confirm_pin = forms.CharField(
+        label = 'New PIN', 
+        max_length = 4
+    )
+
+class PhoneNumberChangeForm(forms.Form): 
+    old_phone_number = forms.CharField(
+        label = 'Old Phone Number ', 
+        max_length = 12
+    )
+    new_phone_number = forms.CharField(
+        label = 'New Phone Number ', 
+        max_length = 12
+    )
