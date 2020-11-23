@@ -3,6 +3,7 @@ from administrator.models import ATMachine
 from ..forms import AdminForm, newCardForm
 from user.models import ATMCard, AccountExtension
 from ..decorator import admin_authenticated
+from main.services import generateCardNumber
 
 #Request to load page with form to add new ATM Card
 @admin_authenticated
@@ -11,27 +12,29 @@ def addNewATMCard(request):
     if request.method == 'POST': 
         form = newCardForm(request.POST)
         if form.is_valid():
-                try: 
-                    card = ATMCard.objects.get(card_number = form.cleaned_data['card_number'])
-                    form = newCardForm()
-                    return render(request, 'administrator/add-atm-card.html', {'form': form, 'message': 'Already a card with that number'})
-                except:
-                    print("Card is good")
+                newNum = generateCardNumber()
+                # try: 
+                #     card = ATMCard.objects.get(card_number = form.cleaned_data['card_number'])
+                #     form = newCardForm()
+                #     return render(request, 'administrator/add-atm-card.html', {'form': form, 'message': 'Already a card with that number'})
+                # except:
+                #     print("Card is good")
                 try:
                     account = AccountExtension.objects.get(account_number = form.cleaned_data['account_number'])
                     #account = AccountExtension.objects.get(account_number = '1111111111')
                 except:
-                    print (form.cleaned_data['account_number'])
                     form = newCardForm()
                     return render(request, 'administrator/add-atm-card.html', {'form': form, 'message': 'Not a valid account number'})
                 #if card.card_number == form.cleaned_data['card_number']: 
                 newATMCard = ATMCard(
-                    card_number = form.cleaned_data['card_number'],
+                    card_number = newNum,
                     pin = form.cleaned_data['pin'],
                     name = form.cleaned_data['name'], 
                     address = form.cleaned_data['address'], 
                     phone_number = form.cleaned_data['phone_number']
                 )
+                print('card number: ', newATMCard.card_number)
+                print('pin: ', newATMCard.pin)
                 newATMCard.account_number = account
                 newATMCard.save()
                 form = newCardForm()

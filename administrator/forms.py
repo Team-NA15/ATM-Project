@@ -26,10 +26,10 @@ class AdminForm(forms.Form):
 
         
 class newCardForm(forms.Form): 
-    card_number = forms.CharField(
-        max_length = 16,
-        label = "card_number"
-    )
+    # card_number = forms.CharField(
+    #     max_length = 16,
+    #     label = "card_number"
+    # )
     account_number = forms.CharField(
         max_length = 10,
         label = "account_number"

@@ -5,6 +5,7 @@ from administrator.models import Admin
 from django.utils import timezone
 # from datetime import datetime, date
 import datetime
+from random import randint
 
 
 #METHOD TO RENDER PAGES WITH ANY CONTEXT
@@ -80,4 +81,15 @@ def validatePhoneNumber(phone_number):
         return False 
     
     return True
+
+def generateCardNumber(): 
+    a = randint(11111111,99999999)
+    b = randint(11111111,99999999)
+    cardNum = str(a) + str(b)
+    try: 
+        card = ATMCard.objects.get(card_number = cardNum)
+    except: 
+        return cardNum
+    generateCardNumber()
+    
 

@@ -71,6 +71,6 @@ class ATMCard(models.Model):
     card_status = models.CharField(
         max_length=15,
         choices=CARD_STATUS_CHOICES, 
-        default = 'active'
+        default = 'deactivated'
     )
 
