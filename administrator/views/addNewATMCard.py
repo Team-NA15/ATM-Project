@@ -12,13 +12,8 @@ def addNewATMCard(request):
     if request.method == 'POST': 
         form = newCardForm(request.POST)
         if form.is_valid():
+                #generate card number for new card 
                 newNum = generateCardNumber()
-                # try: 
-                #     card = ATMCard.objects.get(card_number = form.cleaned_data['card_number'])
-                #     form = newCardForm()
-                #     return render(request, 'administrator/add-atm-card.html', {'form': form, 'message': 'Already a card with that number'})
-                # except:
-                #     print("Card is good")
                 try:
                     account = AccountExtension.objects.get(account_number = form.cleaned_data['account_number'])
                     #account = AccountExtension.objects.get(account_number = '1111111111')
